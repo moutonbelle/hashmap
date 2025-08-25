@@ -6,8 +6,4 @@ hm.set("Tiger", "Rabbit");
 hm.set("Eagle", "Trout");
 hm.set("Shark", "Tuna");
 
-console.log(hm, hm.length);
-
-hm.clear();
-
-console.log(hm);
+console.log(hm.keys());
