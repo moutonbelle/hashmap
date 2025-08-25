@@ -28,7 +28,7 @@ export default class HashMap {
     let bucket = this.buckets[this.hash(key)];
 
     let target = bucket.findKey(key);
-    if (typeof target === "number") bucket.at(target).value = value;
+    if (!(target === null)) bucket.at(target).value = value;
     else {
       bucket.prepend(key, value);
       this.size++;
