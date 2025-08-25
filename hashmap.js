@@ -58,4 +58,11 @@ export default class HashMap {
   get length() {
     return this.size;
   }
+
+  clear() {
+    for (let i = 0; i < this.capacity; i++) {
+      this.buckets[i].clear();
+    }
+    this.size = 0;
+  }
 }

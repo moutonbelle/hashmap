@@ -14,6 +14,11 @@ export class List {
     return curr;
   }
 
+  clear() {
+    this.head = null;
+    this.length = 0;
+  }
+
   append(value = null) {
     let newNode = new Node(value);
 

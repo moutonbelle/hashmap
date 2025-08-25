@@ -3,6 +3,11 @@ import HashMap from "./hashmap.js";
 let hm = new HashMap();
 
 hm.set("Tiger", "Rabbit");
-hm.set("Tiger", "Duck");
+hm.set("Eagle", "Trout");
+hm.set("Shark", "Tuna");
 
-console.log(hm.length);
+console.log(hm, hm.length);
+
+hm.clear();
+
+console.log(hm);
