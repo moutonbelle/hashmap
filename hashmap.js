@@ -54,4 +54,8 @@ export default class HashMap {
     this.size--;
     return true;
   }
+
+  get length() {
+    return this.size;
+  }
 }
