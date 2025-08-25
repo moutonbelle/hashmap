@@ -40,4 +40,8 @@ export default class HashMap {
   get(key) {
     return this.buckets[this.hash(key)].getValue(key);
   }
+
+  has(key) {
+    return this.buckets[this.hash(key)].containsKey(key);
+  }
 }

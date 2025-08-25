@@ -9,5 +9,5 @@ console.log(hm.buckets[7].toString());
 hm.set("Tiger", "Squirrel");
 console.log(hm.buckets[7].toString());
 
-console.log(hm.get("Tiger"));
-console.log(hm.get("Elephant"));
+console.log(hm.has("Tiger"));
+console.log(hm.has("Elephant"));
