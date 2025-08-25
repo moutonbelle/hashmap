@@ -1,4 +1,4 @@
-export default class List {
+export class List {
   constructor() {
     this.head = null;
     this.length = 0;
@@ -14,7 +14,7 @@ export default class List {
     return curr;
   }
 
-  append(value = "") {
+  append(value = null) {
     let newNode = new Node(value);
 
     if (this.head === null) this.head = newNode;
@@ -23,7 +23,7 @@ export default class List {
     this.length++;
   }
 
-  prepend(value = "") {
+  prepend(value = null) {
     let newNode = new Node(value);
 
     if (this.head === null) this.head = node;
@@ -163,8 +163,109 @@ export default class List {
 }
 
 class Node {
-  constructor(value = "") {
+  constructor(value = null) {
     this.value = value;
     this.next = null;
+  }
+}
+
+class KeyValueNode extends Node {
+  constructor(key = null, value = null) {
+    super(value);
+    this.key = key;
+  }
+}
+
+export class KeyValueList extends List {
+  append(key = null, value = null) {
+    let newNode = new KeyValueNode(key, value);
+
+    if (this.head === null) this.head = newNode;
+    else this.tail.next = newNode;
+
+    this.length++;
+  }
+
+  prepend(key = null, value = null) {
+    let newNode = new KeyValueNode(key, value);
+
+    if (this.head === null) this.head = node;
+    else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+  }
+
+  containsKey(key) {
+    // If list is empty, it does not contain key => return false
+    if (this.head === null) return false;
+
+    // Else, traverse list, testing each node for key
+    let curr = this.head;
+    while (curr.next !== null) {
+      if (curr.key == key) return true;
+      curr = curr.next;
+    }
+
+    // Reached end of list; key not contained
+    return false;
+  }
+
+  findKey(key) {
+    // If list is empty, it does not contain key => return null
+    if (this.head === null) return null;
+
+    // Else, traverse list, testing each node for key and tracking index
+    let curr = this.head;
+    let i = 0;
+    while (curr.next !== null) {
+      if (curr.key == key) return i;
+      curr = curr.next;
+      i++;
+    }
+
+    // Reached end of list; key not contained
+    return null;
+  }
+
+  toString() {
+    if (this.head === null) return "null";
+
+    let result = "";
+    let curr = this.head;
+    result += `( ${curr.key}: ${curr.value} ) -> `;
+    while (curr.next !== null) {
+      curr = curr.next;
+      result += `( ${curr.key}: ${curr.value} ) -> `;
+    }
+    result += "null";
+
+    return result;
+  }
+
+  insertAt(key, value, index) {
+    // If index beyond list, error
+    if (index >= this.length) return null;
+
+    // Special cases of prepend or append
+    if (index === 0) this.prepend(key, value);
+    else if (index === this.length - 1) this.append(key, value);
+    else {
+      // If index is in middle of the list, traverse to node before index
+      let curr = this.head;
+      let i = 0;
+      while (i < index - 1) {
+        curr = curr.next;
+        i++;
+      }
+
+      // Insert new node
+      let newNode = new KeyValueNode(key, value);
+      newNode.next = curr.next;
+      curr.next = newNode;
+      this.length++;
+    }
   }
 }

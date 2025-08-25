@@ -6,6 +6,10 @@ export default class HashMap {
     this.loadFactor = loadFactor;
     this.buckets = [];
     this.size = 0;
+
+    for (let i = 0; i < this.capacity; i++) {
+      this.buckets[i] = new List();
+    }
   }
 
   hash(key) {
@@ -18,5 +22,11 @@ export default class HashMap {
     }
 
     return hashCode;
+  }
+
+  set(key, value) {
+    let bucket = buckets[this.hash(key)];
+
+    if (bucket.contains(key))
   }
 }
