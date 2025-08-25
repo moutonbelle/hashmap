@@ -51,6 +51,7 @@ export default class HashMap {
     let target = bucket.findKey(key);
     if (target === null) return false;
     bucket.removeAt(target);
+    this.size--;
     return true;
   }
 }
