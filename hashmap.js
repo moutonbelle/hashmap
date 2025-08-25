@@ -32,9 +32,26 @@ export default class HashMap {
     else {
       bucket.prepend(key, value);
       this.size++;
+      if (this.size > this.capacity * this.loadFactor) this.grow();
     }
 
     // TODO: Have to grow HashMap if size > capacity * loadFactor
+  }
+
+  grow() {
+    // Retrieve contents and clear buckets
+    let contents = this.entries();
+    this.clear();
+
+    // Double capacity and initialize new buckets
+    this.capacity *= 2;
+    for (let i = 0; i < this.capacity; i++) {
+      this.buckets[i] = new KeyValueList();
+    }
+
+    // Add entries to new buckets
+    contents.forEach((item) => this.set(item[0], item[1]));
+    this.size = contents.length;
   }
 
   get(key) {
