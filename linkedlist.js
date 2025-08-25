@@ -26,7 +26,7 @@ export class List {
   prepend(value = null) {
     let newNode = new Node(value);
 
-    if (this.head === null) this.head = node;
+    if (this.head === null) this.head = newNode;
     else {
       newNode.next = this.head;
       this.head = newNode;
@@ -75,7 +75,7 @@ export class List {
 
     // Else, traverse list, testing each node for value
     let curr = this.head;
-    while (curr.next !== null) {
+    while (curr !== null) {
       if (curr.value == value) return true;
       curr = curr.next;
     }
@@ -91,7 +91,7 @@ export class List {
     // Else, traverse list, testing each node for value and tracking index
     let curr = this.head;
     let i = 0;
-    while (curr.next !== null) {
+    while (curr !== null) {
       if (curr.value == value) return i;
       curr = curr.next;
       i++;
@@ -189,7 +189,7 @@ export class KeyValueList extends List {
   prepend(key = null, value = null) {
     let newNode = new KeyValueNode(key, value);
 
-    if (this.head === null) this.head = node;
+    if (this.head === null) this.head = newNode;
     else {
       newNode.next = this.head;
       this.head = newNode;
@@ -204,7 +204,7 @@ export class KeyValueList extends List {
 
     // Else, traverse list, testing each node for key
     let curr = this.head;
-    while (curr.next !== null) {
+    while (curr !== null) {
       if (curr.key == key) return true;
       curr = curr.next;
     }
@@ -220,7 +220,7 @@ export class KeyValueList extends List {
     // Else, traverse list, testing each node for key and tracking index
     let curr = this.head;
     let i = 0;
-    while (curr.next !== null) {
+    while (curr !== null) {
       if (curr.key == key) return i;
       curr = curr.next;
       i++;

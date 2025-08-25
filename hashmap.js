@@ -1,4 +1,4 @@
-import List from "./linkedlist.js";
+import { KeyValueList } from "./linkedlist.js";
 
 export default class HashMap {
   constructor(capacity = 8, loadFactor = 0.75) {
@@ -8,7 +8,7 @@ export default class HashMap {
     this.size = 0;
 
     for (let i = 0; i < this.capacity; i++) {
-      this.buckets[i] = new List();
+      this.buckets[i] = new KeyValueList();
     }
   }
 
@@ -25,8 +25,13 @@ export default class HashMap {
   }
 
   set(key, value) {
-    let bucket = buckets[this.hash(key)];
+    let bucket = this.buckets[this.hash(key)];
 
-    if (bucket.contains(key))
+    let target = bucket.findKey(key);
+    if (typeof target === "number") bucket.at(target).value = value;
+    else {
+      bucket.prepend(key, value);
+      this.size++;
+    }
   }
 }
