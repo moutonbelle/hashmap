@@ -305,4 +305,17 @@ export class KeyValueList extends List {
       return result;
     }
   }
+
+  entries() {
+    if (this.head === null) return [];
+    else {
+      let curr = this.head,
+        result = [];
+      while (curr !== null) {
+        result.push([curr.key, curr.value]);
+        curr = curr.next;
+      }
+      return result;
+    }
+  }
 }

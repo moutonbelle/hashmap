@@ -81,4 +81,12 @@ export default class HashMap {
     }
     return result;
   }
+
+  entries() {
+    let result = [];
+    for (let i = 0; i < this.capacity; i++) {
+      result.push(...this.buckets[i].entries());
+    }
+    return result;
+  }
 }
