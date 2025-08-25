@@ -165,6 +165,19 @@ export class List {
       this.length--;
     }
   }
+
+  values() {
+    if (this.head === null) return [];
+    else {
+      let curr = this.head,
+        result = [];
+      while (curr !== null) {
+        result.push(curr.value);
+        curr = curr.next;
+      }
+      return result;
+    }
+  }
 }
 
 class Node {
@@ -287,19 +300,6 @@ export class KeyValueList extends List {
         result = [];
       while (curr !== null) {
         result.push(curr.key);
-        curr = curr.next;
-      }
-      return result;
-    }
-  }
-
-  values() {
-    if (this.head === null) return [];
-    else {
-      let curr = this.head,
-        result = [];
-      while (curr !== null) {
-        result.push(curr.value);
         curr = curr.next;
       }
       return result;
