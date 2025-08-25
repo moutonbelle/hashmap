@@ -230,6 +230,12 @@ export class KeyValueList extends List {
     return null;
   }
 
+  getValue(key) {
+    let location = this.findKey(key);
+    if (location === null) return null;
+    return this.at(location).value;
+  }
+
   toString() {
     if (this.head === null) return "null";
 

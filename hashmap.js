@@ -33,5 +33,11 @@ export default class HashMap {
       bucket.prepend(key, value);
       this.size++;
     }
+
+    // TODO: Have to grow HashMap if size > capacity * loadFactor
+  }
+
+  get(key) {
+    return this.buckets[this.hash(key)].getValue(key);
   }
 }
