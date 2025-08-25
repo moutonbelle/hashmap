@@ -73,4 +73,12 @@ export default class HashMap {
     }
     return result;
   }
+
+  values() {
+    let result = [];
+    for (let i = 0; i < this.capacity; i++) {
+      result.push(...this.buckets[i].values());
+    }
+    return result;
+  }
 }
