@@ -3,11 +3,11 @@ import HashMap from "./hashmap.js";
 let hm = new HashMap();
 
 hm.set("Tiger", "Rabbit");
+hm.set("Eagle", "Trout");
+
 console.log(hm);
-console.log(hm.buckets[7].toString());
 
-hm.set("Tiger", "Squirrel");
-console.log(hm.buckets[7].toString());
+console.log(hm.remove("Elephant"));
+console.log(hm.remove("Tiger"));
 
-console.log(hm.has("Tiger"));
-console.log(hm.has("Elephant"));
+console.log(hm);

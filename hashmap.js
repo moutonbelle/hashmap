@@ -44,4 +44,13 @@ export default class HashMap {
   has(key) {
     return this.buckets[this.hash(key)].containsKey(key);
   }
+
+  remove(key) {
+    let bucket = this.buckets[this.hash(key)];
+
+    let target = bucket.findKey(key);
+    if (target === null) return false;
+    bucket.removeAt(target);
+    return true;
+  }
 }
