@@ -49,7 +49,6 @@ export default class HashMap {
 
     // Add entries to new buckets
     contents.forEach((item) => this.set(item[0], item[1]));
-    this.size = contents.length;
   }
 
   get(key) {

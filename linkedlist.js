@@ -81,7 +81,7 @@ export class List {
     // Else, traverse list, testing each node for value
     let curr = this.head;
     while (curr !== null) {
-      if (curr.value == value) return true;
+      if (curr.value === value) return true;
       curr = curr.next;
     }
 
@@ -97,7 +97,7 @@ export class List {
     let curr = this.head;
     let i = 0;
     while (curr !== null) {
-      if (curr.value == value) return i;
+      if (curr.value === value) return i;
       curr = curr.next;
       i++;
     }
@@ -223,7 +223,7 @@ export class KeyValueList extends List {
     // Else, traverse list, testing each node for key
     let curr = this.head;
     while (curr !== null) {
-      if (curr.key == key) return true;
+      if (curr.key === key) return true;
       curr = curr.next;
     }
 
@@ -239,7 +239,7 @@ export class KeyValueList extends List {
     let curr = this.head;
     let i = 0;
     while (curr !== null) {
-      if (curr.key == key) return i;
+      if (curr.key === key) return i;
       curr = curr.next;
       i++;
     }

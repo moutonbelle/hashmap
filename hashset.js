@@ -48,7 +48,6 @@ export default class HashSet {
 
     // Add entries to new buckets
     contents.forEach((item) => this.set(item));
-    this.size = contents.length;
   }
 
   get(key) {
