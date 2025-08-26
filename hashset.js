@@ -1,6 +1,6 @@
-import { KeyValueList } from "./linkedlist.js";
+import { List } from "./linkedlist.js";
 
-export default class HashMap {
+export default class HashSet {
   constructor(capacity = 8, loadFactor = 0.75) {
     this.capacity = capacity;
     this.loadFactor = loadFactor;
@@ -8,7 +8,7 @@ export default class HashMap {
     this.size = 0;
 
     for (let i = 0; i < this.capacity; i++) {
-      this.buckets[i] = new KeyValueList();
+      this.buckets[i] = new List();
     }
   }
 
@@ -24,13 +24,12 @@ export default class HashMap {
     return hashCode;
   }
 
-  set(key, value) {
+  set(key) {
     let bucket = this.buckets[this.hash(key)];
 
-    let target = bucket.findKey(key);
-    if (!(target === null)) bucket.at(target).value = value;
-    else {
-      bucket.prepend(key, value);
+    let target = bucket.find(key);
+    if (target === null) {
+      bucket.prepend(key);
       this.size++;
       if (this.size > this.capacity * this.loadFactor) this.grow();
     }
@@ -38,32 +37,32 @@ export default class HashMap {
 
   grow() {
     // Retrieve contents and clear buckets
-    let contents = this.entries();
+    let contents = this.keys();
     this.clear();
 
     // Double capacity and initialize new buckets
     this.capacity *= 2;
     for (let i = 0; i < this.capacity; i++) {
-      this.buckets[i] = new KeyValueList();
+      this.buckets[i] = new List();
     }
 
     // Add entries to new buckets
-    contents.forEach((item) => this.set(item[0], item[1]));
+    contents.forEach((item) => this.set(item));
     this.size = contents.length;
   }
 
   get(key) {
-    return this.buckets[this.hash(key)].getValue(key);
+    return this.has(key);
   }
 
   has(key) {
-    return this.buckets[this.hash(key)].containsKey(key);
+    return this.buckets[this.hash(key)].contains(key);
   }
 
   remove(key) {
     let bucket = this.buckets[this.hash(key)];
 
-    let target = bucket.findKey(key);
+    let target = bucket.find(key);
     if (target === null) return false;
     bucket.removeAt(target);
     this.size--;
@@ -84,24 +83,12 @@ export default class HashMap {
   keys() {
     let result = [];
     for (let i = 0; i < this.capacity; i++) {
-      result.push(...this.buckets[i].keys());
-    }
-    return result;
-  }
-
-  values() {
-    let result = [];
-    for (let i = 0; i < this.capacity; i++) {
       result.push(...this.buckets[i].values());
     }
     return result;
   }
 
   entries() {
-    let result = [];
-    for (let i = 0; i < this.capacity; i++) {
-      result.push(...this.buckets[i].entries());
-    }
-    return result;
+    return this.keys();
   }
 }
